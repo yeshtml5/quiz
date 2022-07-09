@@ -1,12 +1,7 @@
-import CommentList from '../components/CommentList';
+import CommentList from "../components/CommentList";
 
-function CommentListContainer(){
-
-    return (
-      <CommentList />
-    )
-
-
+function CommentListContainer() {
+  return <CommentList />;
 }
 
 export default CommentListContainer;
