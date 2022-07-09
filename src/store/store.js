@@ -1,3 +1,6 @@
+/**
+ * @todo
+ */
 import {
   configureStore,
   combineReducers,
@@ -25,8 +28,13 @@ export default function createStore() {
     devTools: true,
     middleware: [...getDefaultMiddleware(), (sagaMiddleware, logger)],
   });
-
   // sagaMiddleware.run(rootSaga);
 
   return store;
 }
+/****************
+[문제]
+Error: Actions must be plain objects. Use custom middleware for async actions.
+
+middleware: [...getDefaultMiddleware(), (sagaMiddleware, logger)],
+ */

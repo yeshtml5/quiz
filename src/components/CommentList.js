@@ -17,21 +17,33 @@ import { getComments } from "../features/comments/commentsSlice";
 function CommentList() {
   // const
   const dispatch = useDispatch();
-  const { list } = useSelector((state) => state.comments);
+  const { comments } = useSelector((state) => state.comments);
 
   useEffect(() => {
     dispatch(getComments());
   }, [dispatch]);
 
-  return list.map((list, index) => (
+  return comments.map((list, index) => (
     <Comment key={index}>
       <img src={list.profile_url} alt="" />
       {list.author}
       <CreatedAt>{list.createdAt}</CreatedAt>
       <Content>{list.content}</Content>
       <Button>
-        <a>수정</a>
-        <a>삭제</a>
+        <a
+          onClick={() => {
+            alert("수정" + index);
+          }}
+        >
+          수정
+        </a>
+        <a
+          onClick={() => {
+            alert("삭제" + index);
+          }}
+        >
+          삭제
+        </a>
       </Button>
       <hr />
     </Comment>
