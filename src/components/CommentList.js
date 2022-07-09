@@ -1,18 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../features/comments/commentsSlice";
-
-// 임시 데이터 입니다. 코드 작성시 data 부분을 지워주세요
-// const data = [
-//   {
-//     id: 1,
-//     profile_url: "https://picsum.photos/id/1/50/50",
-//     author: "abc_1",
-//     content: "UI 테스트는 어떻게 진행하나요",
-//     createdAt: "2020-05-01",
-//   },
-// ];
+import { commentsAction } from "../features/comments/commentsSlice";
 
 function CommentList() {
   // const
@@ -20,48 +9,30 @@ function CommentList() {
   const { comments } = useSelector((state) => state.comments);
 
   useEffect(() => {
-    dispatch(getComments());
+    dispatch(commentsAction.getComments());
   }, [dispatch]);
-
-  return comments.map((list, index) => (
-    <Comment key={index}>
-      <img src={list.profile_url} alt="" />
-      {list.author}
-      <CreatedAt>{list.createdAt}</CreatedAt>
-      <Content>{list.content}</Content>
-      <Button>
-        <a
-          onClick={() => {
-            alert("수정" + index);
-          }}
-        >
-          수정
-        </a>
-        <a
-          onClick={() => {
-            alert("삭제" + index);
-          }}
-        >
-          삭제
-        </a>
-      </Button>
-      <hr />
-    </Comment>
-  ));
-
-  // return data.map((comment, key) => (
-  //   <Comment key={key}>
-  //     <img src={comment.profile_url} alt="" />
-  //     {comment.author}
-  //     <CreatedAt>{comment.createdAt}</CreatedAt>
-  //     <Content>{comment.content}</Content>
-  //     <Button>
-  //       <a>수정</a>
-  //       <a>삭제</a>
-  //     </Button>
-  //     <hr />
-  //   </Comment>
-  // ));
+  return (
+    <div>
+      {/* <div>{JSON.stringify(comments, null, 1)}</div> */}
+      <section>
+        {comments.map((list, index) => {
+          return (
+            <Comment key={index}>
+              <img src={list.profile_url} alt="" />
+              {list.author}
+              <CreatedAt>{list.createdAt}</CreatedAt>
+              <Content>{list.content}</Content>
+              <Button>
+                <a>수정</a>
+                <a>삭제</a>
+              </Button>
+              <hr />
+            </Comment>
+          );
+        })}
+      </section>
+    </div>
+  );
 }
 
 export default CommentList;
