@@ -25,6 +25,7 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getComments.pending, (state) => {});
     builder.addCase(getComments.fulfilled, (state, action) => {
       state.comments = action.payload;
     });

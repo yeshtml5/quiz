@@ -29,3 +29,4 @@ DELETE /comments/{commentId}
 
 #참고영상
 https://www.youtube.com/watch?v=xtD4YMKWI7w
+https://www.youtube.com/watch?v=9MMSRn5NoFY&t=1422s
