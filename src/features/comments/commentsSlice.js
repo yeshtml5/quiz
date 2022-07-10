@@ -32,7 +32,11 @@ const slice = createSlice({
     getCommentsSuccess: (state, action) => {
       state.comments = action.payload;
     },
-    getCommentsError: (state, action) => {},
+    deleteComments: (state, action) => {},
+    deleteCommentsSuccess: (state, action) => {
+      // state.comments = action.payload;
+    },
+    commentsError: (state, action) => {},
   },
 });
 //*------------------------------- [export]

@@ -31,3 +31,12 @@ export const API_getComments = (page) => {
 // addComments
 
 // removeComments
+// getComments
+export const API_deleteComments = (id) => {
+  return axios({
+    method: "DELETE",
+    url: `${API}/${id}`,
+  }).then((res) => {
+    return res.data;
+  });
+};

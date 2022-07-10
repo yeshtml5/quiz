@@ -8,9 +8,12 @@ function CommentList() {
   const dispatch = useDispatch();
   const { comments } = useSelector((state) => state.comments);
 
-  useEffect(() => {
+  const init = () => {
     dispatch(commentsAction.getComments());
     dispatch(commentsAction.getAllComments());
+  };
+  useEffect(() => {
+    init();
   }, [dispatch]);
   return (
     <div>
@@ -25,7 +28,15 @@ function CommentList() {
               <Content>{list.content}</Content>
               <Button>
                 <a>수정</a>
-                <a>삭제</a>
+                <a
+                  onClick={() => {
+                    //todo 삭제할때 진짜삭제할까요? 팝업형태 필요.
+                    dispatch(commentsAction.deleteComments(list?.id));
+                    init();
+                  }}
+                >
+                  삭제
+                </a>
               </Button>
               <hr />
             </Comment>

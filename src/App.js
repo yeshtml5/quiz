@@ -7,11 +7,13 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 function App() {
   // store
-  const { total } = useSelector((state) => state.comments);
+  const { page, total } = useSelector((state) => state.comments);
   return (
     <div>
       {/* 기능추가 */}
-      <Header>총 갯수 : {total}개</Header>
+      <Header>
+        총 갯수 : {total}개 , 현재페이지 : {page + 1}
+      </Header>
       <CommentListContainer />
       <PageListContainer />
       <FormContainer />
