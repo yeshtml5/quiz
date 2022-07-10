@@ -29,9 +29,16 @@ export const API_getComments = (page) => {
   });
 };
 // addComments
-
+export const API_addComments = (data) => {
+  return axios({
+    method: "POST",
+    url: API,
+    data,
+  }).then((res) => {
+    return res.data;
+  });
+};
 // removeComments
-// getComments
 export const API_deleteComments = (id) => {
   return axios({
     method: "DELETE",

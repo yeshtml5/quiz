@@ -32,10 +32,10 @@ const slice = createSlice({
     getCommentsSuccess: (state, action) => {
       state.comments = action.payload;
     },
+    addComments: (state, action) => {},
+    addCommentsSuccess: (state, action) => {},
     deleteComments: (state, action) => {},
-    deleteCommentsSuccess: (state, action) => {
-      // state.comments = action.payload;
-    },
+    deleteCommentsSuccess: (state, action) => {},
     commentsError: (state, action) => {},
   },
 });
