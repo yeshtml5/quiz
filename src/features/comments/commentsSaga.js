@@ -1,3 +1,6 @@
+/**
+ * @name 코멘트Saga
+ **/
 import { all, fork, call, put, takeEvery } from "redux-saga/effects";
 import { useTheme } from "styled-components";
 import { API } from "../../const";

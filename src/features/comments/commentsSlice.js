@@ -6,6 +6,7 @@ const name = "comments";
 const initialState = {
   status: "",
   comments: [],
+  total: 0,
   //  comments: reducerUtils.initial(), // 초기화
 };
 
@@ -19,6 +20,7 @@ const slice = createSlice({
     },
     getCommentsSuccess: (state, action) => {
       state.comments = action.payload;
+      state.total = state.comments.length;
     },
     getCommentsError: (state, action) => {},
   },
