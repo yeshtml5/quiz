@@ -4,7 +4,7 @@
       "id": 1,
       "profile_url": "https://picsum.photos/id/1/50/50",
       "author": "abc_1",
-      "content": "UI 테스트는 어떻게 진행하나요",
+      "content": "UI 테스트는 어떻게 진행하나요111",
       "createdAt": "2022-03-01"
     },
     {
@@ -92,11 +92,11 @@
       "createdAt": "2022-03-15"
     },
     {
-      "author": "ㅁㄴㅁㄴ",
-      "createdAt": "",
+      "author": "1111333333",
+      "createdAt": "2022-7-11",
       "profile_url": "https://picsum.photos/id/1/50/50",
-      "content": "ㅁㄴㅁㄴㅁㄴㅁ",
-      "id": 25
+      "content": "2222",
+      "id": 16
     }
   ]
 }

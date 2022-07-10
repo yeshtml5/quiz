@@ -30,6 +30,7 @@ export const API_getComments = (page) => {
 };
 // addComments
 export const API_addComments = (data) => {
+  console.log(data);
   return axios({
     method: "POST",
     url: API,

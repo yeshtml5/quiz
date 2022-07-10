@@ -22,12 +22,12 @@ function Form() {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+  // 수정변경있을때만
   useEffect(() => {
-    setValues(modify);
+    !!modify?.id && setValues(modify);
   }, [modify]);
   return (
     <FormStyle>
-      <div>{JSON.stringify(modify, null, 1)}</div>
       <form>
         <input
           value={values.profile_url}
@@ -69,12 +69,14 @@ function Form() {
             event.preventDefault();
             const isModify = modify?.id;
             if (!!isModify) {
+              //-----수정모드
               dispatch(
                 commentsAction.putComments(
                   Object.assign(values, { id: modify?.id })
                 )
               );
             } else {
+              // alert(JSON.stringify(values, null, 1));
               dispatch(commentsAction.addComments(values));
             }
             dispatch(commentsAction.getAllComments());
@@ -86,11 +88,13 @@ function Form() {
               profile_url: "https://picsum.photos/id/1/50/50",
               content: "",
             });
+            // modify 초기화
+            dispatch(commentsAction.setModify({}));
           }}
         >
           등록
         </button>
-        <div>{JSON.stringify(values, null, 1)}</div>
+        {/* <div>{JSON.stringify(values, null, 1)}</div> */}
       </form>
     </FormStyle>
   );
