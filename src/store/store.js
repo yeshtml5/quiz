@@ -1,11 +1,7 @@
 /**
  * @todo
  */
-import {
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all, call } from "redux-saga/effects";
 import logger from "redux-logger";
@@ -26,9 +22,9 @@ export default function createStore() {
   const store = configureStore({
     reducer: rootReducer,
     devTools: true,
-    middleware: [...getDefaultMiddleware(), (sagaMiddleware, logger)],
+    middleware: [sagaMiddleware, logger],
   });
-  // sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
   return store;
 }
