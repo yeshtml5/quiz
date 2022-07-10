@@ -3,34 +3,32 @@
  **/
 import { all, fork, call, put, takeEvery } from "redux-saga/effects";
 import { useTheme } from "styled-components";
-import { API_getComments } from "../../api/comments";
+import { API_getAllComments, API_getComments } from "../../api/comments";
 import { API } from "../../const";
 import { commentsAction } from "./commentsSlice";
 // mport { getComments, getCommentsSuccess } from "./commentsSlice";
 
-// 가져오기(GET)
-function* getComments() {
+// 모두가져오기(GET)
+function* getAllComments() {
   try {
-    // API요청
-    const res = yield call(() => API_getComments());
-    yield put(commentsAction.getCommentsSuccess(res));
+    const res = yield call(() => API_getAllComments());
+    yield put(commentsAction.getAllCommentsSuccess(res));
   } catch (error) {
-    yield put(commentsAction.getCommentsError(error));
+    // yield put(commentsAction.getCommentsError(error));
   }
 }
-// 삭제하기(DELETE)
-function* deleteComments() {
+// 가져오기(GET)
+function* getComments(data) {
   try {
-    // API요청
-    const res = yield call(() => fetch(API));
-    const formatResponse = yield res.json();
-    yield put(commentsAction.getCommentsSuccess(formatResponse));
+    const res = yield call(() => API_getComments(data?.payload + 1));
+    yield put(commentsAction.getCommentsSuccess(res));
   } catch (error) {
     yield put(commentsAction.getCommentsError(error));
   }
 }
 
 function* watchGetComments() {
+  yield takeEvery(commentsAction.getAllComments, getAllComments);
   yield takeEvery(commentsAction.getComments, getComments);
 }
 // export const

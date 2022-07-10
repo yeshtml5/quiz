@@ -10,6 +10,7 @@ function CommentList() {
 
   useEffect(() => {
     dispatch(commentsAction.getComments());
+    dispatch(commentsAction.getAllComments());
   }, [dispatch]);
   return (
     <div>

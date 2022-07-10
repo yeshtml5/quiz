@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { PAGE_LIST_LIMIT } from "../../const";
 import { reducerUtils } from "../../util/async.utill";
 // config
 const name = "comments";
@@ -18,15 +19,18 @@ const slice = createSlice({
   initialState,
   reducers: {
     //*------------------------------- [Pager]
-    // 해당페이지선택
-    setPage: (state, action) => {
-      state.page = action.payload;
-    },
+
     //*------------------------------- [getComments]
-    getComments: (state) => {},
+    getAllComments: (state) => {},
+    getAllCommentsSuccess: (state, action) => {
+      state.total = action.payload.length;
+      state.page_total = Math.ceil(action.payload.length / PAGE_LIST_LIMIT);
+    },
+    getComments: (state, action) => {
+      state.page = action.payload || 0;
+    },
     getCommentsSuccess: (state, action) => {
       state.comments = action.payload;
-      state.total = state.comments.length;
     },
     getCommentsError: (state, action) => {},
   },
