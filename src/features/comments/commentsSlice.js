@@ -7,6 +7,8 @@ const initialState = {
   status: "",
   comments: [],
   total: 0,
+  page: 0,
+  page_total: 0,
   //  comments: reducerUtils.initial(), // 초기화
 };
 
@@ -15,9 +17,13 @@ const slice = createSlice({
   name,
   initialState,
   reducers: {
-    getComments: (state) => {
-      // state.comments.initial;
+    //*------------------------------- [Pager]
+    // 해당페이지선택
+    setPage: (state, action) => {
+      state.page = action.payload;
     },
+    //*------------------------------- [getComments]
+    getComments: (state) => {},
     getCommentsSuccess: (state, action) => {
       state.comments = action.payload;
       state.total = state.comments.length;
@@ -28,10 +34,11 @@ const slice = createSlice({
 //*------------------------------- [export]
 export const commentsReducer = slice.reducer;
 export const commentsAction = slice.actions;
-// export const { getComments, getCommentsSuccess } = slice.actions;
-
 export const COMMENTS = slice.name;
-
+//*------------------------------- [const]
+export const COMMENTS_EVENT = {
+  GET_FETCH: "GET_FETCH",
+};
 /* saga */
 
 /***********
