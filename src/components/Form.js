@@ -84,7 +84,9 @@ function Form() {
             // setValues 초기화
             setValues({
               author: "",
-              createdAt: "",
+              createdAt: `${today.getFullYear()}-${
+                today.getMonth() + 1
+              }-${today.getDate()}`,
               profile_url: "https://picsum.photos/id/1/50/50",
               content: "",
             });
