@@ -27,7 +27,15 @@ function CommentList() {
               <CreatedAt>{list.createdAt}</CreatedAt>
               <Content>{list.content}</Content>
               <Button>
-                <a>수정</a>
+                <a
+                  onClick={() => {
+                    //수정하기
+                    dispatch(commentsAction.setModify(list));
+                    // init();
+                  }}
+                >
+                  수정
+                </a>
                 <a
                   onClick={() => {
                     //todo 삭제할때 진짜삭제할까요? 팝업형태 필요.

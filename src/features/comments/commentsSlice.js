@@ -7,6 +7,7 @@ const name = "comments";
 const initialState = {
   status: "",
   comments: [],
+  modify: {},
   total: 0,
   page: 0,
   page_total: 0,
@@ -19,8 +20,10 @@ const slice = createSlice({
   initialState,
   reducers: {
     //*------------------------------- [Pager]
-
-    //*------------------------------- [getComments]
+    setModify: (state, action) => {
+      state.modify = action.payload;
+    },
+    //*------------------------------- [comments CRUD]
     getAllComments: (state) => {},
     getAllCommentsSuccess: (state, action) => {
       state.total = action.payload.length;
@@ -34,6 +37,10 @@ const slice = createSlice({
     },
     addComments: (state, action) => {},
     addCommentsSuccess: (state, action) => {},
+    putComments: (state, action) => {},
+    putCommentsSuccess: (state, action) => {
+      // 수정된컨텐츠별도저장
+    },
     deleteComments: (state, action) => {},
     deleteCommentsSuccess: (state, action) => {},
     commentsError: (state, action) => {},

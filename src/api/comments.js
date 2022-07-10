@@ -47,3 +47,14 @@ export const API_deleteComments = (id) => {
     return res.data;
   });
 };
+// removeComments
+export const API_putComments = (data) => {
+  return axios({
+    method: "PUT",
+    data,
+    url: `${API}/${data.id}`,
+  }).then((res) => {
+    console.log(res);
+    return res.data;
+  });
+};

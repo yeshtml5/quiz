@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { commentsAction } from "../features/comments/commentsSlice";
 
 function Form() {
   // redux
   const dispatch = useDispatch();
+  const { modify } = useSelector((state) => state.comments);
   // hooks
+  const today = new Date();
+  // 기본값으로 이미지및 날짜는 유동적으로 받아오게처리
   const [values, setValues] = useState({
     author: "",
-    createdAt: "",
+    createdAt: `${today.getFullYear()}-${
+      today.getMonth() + 1
+    }-${today.getDate()}`,
     profile_url: "https://picsum.photos/id/1/50/50",
     content: "",
   });
@@ -17,8 +22,12 @@ function Form() {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+  useEffect(() => {
+    setValues(modify);
+  }, [modify]);
   return (
     <FormStyle>
+      <div>{JSON.stringify(modify, null, 1)}</div>
       <form>
         <input
           value={values.profile_url}
@@ -58,7 +67,16 @@ function Form() {
           type="submit"
           onClick={(event) => {
             event.preventDefault();
-            dispatch(commentsAction.addComments(values));
+            const isModify = modify?.id;
+            if (!!isModify) {
+              dispatch(
+                commentsAction.putComments(
+                  Object.assign(values, { id: modify?.id })
+                )
+              );
+            } else {
+              dispatch(commentsAction.addComments(values));
+            }
             dispatch(commentsAction.getAllComments());
             dispatch(commentsAction.getComments());
             // setValues 초기화
