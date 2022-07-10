@@ -36,9 +36,7 @@ export const commentsReducer = slice.reducer;
 export const commentsAction = slice.actions;
 export const COMMENTS = slice.name;
 //*------------------------------- [const]
-export const COMMENTS_EVENT = {
-  GET_FETCH: "GET_FETCH",
-};
+
 /* saga */
 
 /***********
