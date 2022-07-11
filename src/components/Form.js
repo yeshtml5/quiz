@@ -1,37 +1,34 @@
+/**
+ * @name FormContainer
+ * @todo react-hook-form
+ */
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { commentsAction } from "../features/comments/commentsSlice";
 
-function Form() {
+function Form({ onSubmit }) {
+  // hooks
+  const { register, handleSubmit, setValue } = useForm();
+  // defaultValue
   // redux
   const dispatch = useDispatch();
   const { modify } = useSelector((state) => state.comments);
   // hooks
-  const today = new Date();
-  // 기본값으로 이미지및 날짜는 유동적으로 받아오게처리
-  const [values, setValues] = useState({
-    author: "",
-    createdAt: `${today.getFullYear()}-${
-      today.getMonth() + 1
-    }-${today.getDate()}`,
-    profile_url: "https://picsum.photos/id/1/50/50",
-    content: "",
-  });
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValues({ ...values, [name]: value });
-  };
-  // 수정변경있을때만
+
+  // 수정업데이트
   useEffect(() => {
-    !!modify?.id && setValues(modify);
+    setValue("profile_url", modify.profile_url);
+    setValue("author", modify.author);
+    setValue("content", modify.content);
+    setValue("createdAt", modify.createdAt);
   }, [modify]);
   return (
     <FormStyle>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          value={values.profile_url}
-          onChange={handleChange}
+          {...register("profile_url")}
           type="text"
           name="profile_url"
           placeholder="https://picsum.photos/id/1/50/50"
@@ -42,13 +39,11 @@ function Form() {
           type="text"
           name="author"
           placeholder="작성자"
-          value={values.author}
-          onChange={handleChange}
+          {...register("author")}
         />
         <br />
         <textarea
-          value={values.content}
-          onChange={handleChange}
+          {...register("content")}
           name="content"
           placeholder="내용"
           required
@@ -56,46 +51,13 @@ function Form() {
         <br />
         <input
           type="text"
-          value={values.createdAt}
-          onChange={handleChange}
+          {...register("createdAt")}
           name="createdAt"
           placeholder="2020-05-30"
           required
         />
         <br />
-        <button
-          type="submit"
-          onClick={(event) => {
-            event.preventDefault();
-            const isModify = modify?.id;
-            if (!!isModify) {
-              //-----수정모드
-              dispatch(
-                commentsAction.putComments(
-                  Object.assign(values, { id: modify?.id })
-                )
-              );
-            } else {
-              // alert(JSON.stringify(values, null, 1));
-              dispatch(commentsAction.addComments(values));
-            }
-            dispatch(commentsAction.getAllComments());
-            dispatch(commentsAction.getComments());
-            // setValues 초기화
-            setValues({
-              author: "",
-              createdAt: `${today.getFullYear()}-${
-                today.getMonth() + 1
-              }-${today.getDate()}`,
-              profile_url: "https://picsum.photos/id/1/50/50",
-              content: "",
-            });
-            // modify 초기화
-            dispatch(commentsAction.setModify({}));
-          }}
-        >
-          등록
-        </button>
+        <button type="submit">등록</button>
         {/* <div>{JSON.stringify(values, null, 1)}</div> */}
       </form>
     </FormStyle>
