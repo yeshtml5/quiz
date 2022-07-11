@@ -26,6 +26,7 @@ function* getAllComments() {
 // 가져오기(GET)
 function* getComments(data) {
   try {
+    console.log(data);
     const res = yield call(() => API_getComments(data?.payload + 1));
     yield put(commentsAction.getCommentsSuccess(res));
   } catch (error) {
@@ -37,6 +38,9 @@ function* addComments(data) {
   try {
     const res = yield call(() => API_addComments(data?.payload));
     yield put(commentsAction.addCommentsSuccess(res));
+    //*---- 코드추가
+    yield getAllComments();
+    yield getComments();
   } catch (error) {
     yield put(commentsAction.commentsError(error));
   }
@@ -55,6 +59,12 @@ function* putComments(data) {
   try {
     const res = yield call(() => API_putComments(data?.payload));
     yield put(commentsAction.putCommentsSuccess(res));
+    //*---- 코드추가
+    yield getAllComments();
+    yield getComments();
+    //*---- 코드추가
+    yield getAllComments();
+    yield getComments();
   } catch (error) {
     yield put(commentsAction.commentsError(error));
   }

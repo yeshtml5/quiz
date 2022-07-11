@@ -25,19 +25,12 @@ function FormContainer() {
       );
     } else {
       //*----------- 등록
+      // 강제지연
       dispatch(commentsAction.addComments(data));
+      // setTimeout(() => {
+      //   dispatch(commentsAction.addComments(data));
+      // }, 2000);
     }
-    dispatch(commentsAction.getAllComments());
-    dispatch(commentsAction.getComments());
-    // setValues 초기화
-    // setValues({
-    //   author: "",
-    //   createdAt: `${today.getFullYear()}-${
-    //     today.getMonth() + 1
-    //   }-${today.getDate()}`,
-    //   profile_url: "https://picsum.photos/id/1/50/50",
-    //   content: "",
-    // });
     // modify 초기화
     dispatch(commentsAction.setModify({}));
   };
