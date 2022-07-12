@@ -13,7 +13,6 @@ function Form({ onSubmit }) {
   const { register, handleSubmit, setValue } = useForm();
   // defaultValue
   // redux
-  const dispatch = useDispatch();
   const { modify } = useSelector((state) => state.comments);
   // hooks
 

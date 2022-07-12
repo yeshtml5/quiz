@@ -26,10 +26,12 @@ function FormContainer() {
     } else {
       //*----------- 등록
       // 강제지연
-      dispatch(commentsAction.addComments(data));
-      // setTimeout(() => {
-      //   dispatch(commentsAction.addComments(data));
-      // }, 2000);
+      // dispatch(commentsAction.addComments(data));
+      setTimeout(() => {
+        dispatch(commentsAction.addComments(data));
+      }, 0);
+      // dispatch(commentsAction.getAllComments());
+      // dispatch(commentsAction.getComments());
     }
     // modify 초기화
     dispatch(commentsAction.setModify({}));

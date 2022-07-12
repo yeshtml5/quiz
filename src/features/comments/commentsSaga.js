@@ -4,13 +4,12 @@
 import {
   all,
   fork,
-  call,
   put,
-  takeEvery,
   takeLatest,
+  call,
   takeLeading,
+  delay,
 } from "redux-saga/effects";
-import { useTheme } from "styled-components";
 import {
   API_addComments,
   API_deleteComments,
@@ -18,24 +17,16 @@ import {
   API_getComments,
   API_putComments,
 } from "../../api/comments";
-import { API } from "../../const";
 import { commentsAction } from "./commentsSlice";
 // mport { getComments, getCommentsSuccess } from "./commentsSlice";
 
-// 모두가져오기(GET)
-function* getAllComments() {
-  try {
-    const res = yield call(() => API_getAllComments());
-    yield put(commentsAction.getAllCommentsSuccess(res));
-  } catch (error) {
-    yield put(commentsAction.commentsError(error));
-  }
-}
 // 가져오기(GET)
 function* getComments(data) {
   try {
-    console.log(data);
-    const res = yield call(() => API_getComments(data?.payload + 1));
+    const all = yield API_getAllComments();
+    yield put(commentsAction.getAllCommentsSuccess(all));
+    yield delay(0);
+    const res = yield API_getComments(data?.payload + 1);
     yield put(commentsAction.getCommentsSuccess(res));
   } catch (error) {
     yield put(commentsAction.commentsError(error));
@@ -45,10 +36,9 @@ function* getComments(data) {
 function* addComments(data) {
   try {
     // const res = yield call(() => API_addComments(data?.payload));
-    const comments = yield API_addComments(data?.payload);
+    const comments = yield call(() => API_addComments(data?.payload));
     yield put(commentsAction.addCommentsSuccess(comments));
-    //*---- 코드추가
-    yield getAllComments();
+    //*---- 갱신
     yield getComments();
   } catch (error) {
     yield put(commentsAction.commentsError(error));
@@ -57,8 +47,9 @@ function* addComments(data) {
 // 삭제하기(DELETE)
 function* deleteComments(data) {
   try {
-    const res = yield call(() => API_deleteComments(data?.payload));
+    const res = yield API_deleteComments(data?.payload);
     yield put(commentsAction.deleteCommentsSuccess(res));
+    yield getComments();
   } catch (error) {
     yield put(commentsAction.commentsError(error));
   }
@@ -66,21 +57,19 @@ function* deleteComments(data) {
 // 수정하기(PUT)
 function* putComments(data) {
   try {
-    const res = yield call(() => API_putComments(data?.payload));
+    const res = yield API_putComments(data?.payload);
     yield put(commentsAction.putCommentsSuccess(res));
     //*---- 코드추가
-    yield getAllComments();
     yield getComments();
   } catch (error) {
     yield put(commentsAction.commentsError(error));
   }
 }
 function* watchGetComments() {
-  yield takeLeading(commentsAction.getAllComments, getAllComments);
-  yield takeLeading(commentsAction.getComments, getComments);
-  yield takeLatest(commentsAction.deleteComments, deleteComments);
-  yield takeLatest(commentsAction.addComments, addComments);
-  yield takeLatest(commentsAction.putComments, putComments);
+  yield takeLatest(commentsAction.getComments, getComments);
+  yield takeLeading(commentsAction.deleteComments, deleteComments);
+  yield takeLeading(commentsAction.addComments, addComments);
+  yield takeLeading(commentsAction.putComments, putComments);
 }
 // export const
 // watchGetComments 바로 export 해서 rootSaga에 넣어도 되는데 saga가 여러개 인 경우 saga로 한번더 감싸준다.

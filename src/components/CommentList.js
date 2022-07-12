@@ -10,11 +10,10 @@ function CommentList() {
 
   const init = () => {
     dispatch(commentsAction.getComments());
-    dispatch(commentsAction.getAllComments());
   };
   useEffect(() => {
     init();
-  }, [dispatch]);
+  }, []);
   return (
     <div>
       {/* <div>{JSON.stringify(comments, null, 1)}</div> */}
