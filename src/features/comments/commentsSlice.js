@@ -38,9 +38,7 @@ const slice = createSlice({
     addComments: (state, action) => {},
     addCommentsSuccess: (state, action) => {},
     putComments: (state, action) => {},
-    putCommentsSuccess: (state, action) => {
-      // 수정된컨텐츠별도저장
-    },
+    putCommentsSuccess: (state, action) => {},
     deleteComments: (state, action) => {},
     deleteCommentsSuccess: (state, action) => {},
     commentsError: (state, action) => {},

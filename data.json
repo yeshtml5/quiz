@@ -36,32 +36,11 @@
       "createdAt": "2022-03-05"
     },
     {
-      "id": 6,
-      "profile_url": "https://picsum.photos/id/6/50/50",
-      "author": "abc_6",
-      "content": "React 소스 배포는 보통 어떤식으로 하나요.",
-      "createdAt": "2022-03-06"
-    },
-    {
-      "id": 11,
-      "profile_url": "https://picsum.photos/id/11/50/50",
-      "author": "abc_11",
-      "content": "주변에 React 개발자 있나요",
-      "createdAt": "2022-03-11"
-    },
-    {
-      "id": 12,
-      "profile_url": "https://picsum.photos/id/12/50/50",
-      "author": "abc_12",
-      "content": "주변에 React 개발자 있나요",
-      "createdAt": "2022-03-12"
-    },
-    {
-      "profile_url": "https://picsum.photos/id/19/50/50",
-      "author": "11111",
-      "content": "test _ 1234",
-      "createdAt": "2022-01-1",
-      "id": 25
+      "profile_url": "2323",
+      "author": "2321",
+      "content": "323111",
+      "createdAt": "3232",
+      "id": 6
     }
   ]
 }
