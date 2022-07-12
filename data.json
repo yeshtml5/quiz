@@ -62,13 +62,6 @@
       "content": "test _ 1234",
       "createdAt": "2022-01-1",
       "id": 25
-    },
-    {
-      "profile_url": "1111",
-      "author": "2222",
-      "content": "7677777",
-      "createdAt": "44444",
-      "id": 26
     }
   ]
 }

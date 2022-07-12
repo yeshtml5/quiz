@@ -31,6 +31,5 @@ export default function createStore() {
 /****************
 [문제]
 Error: Actions must be plain objects. Use custom middleware for async actions.
-
 middleware: [...getDefaultMiddleware(), (sagaMiddleware, logger)],
  */
