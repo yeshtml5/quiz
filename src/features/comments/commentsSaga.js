@@ -1,7 +1,15 @@
 /**
  * @name 코멘트Saga
  **/
-import { all, fork, call, put, takeEvery } from "redux-saga/effects";
+import {
+  all,
+  fork,
+  call,
+  put,
+  takeEvery,
+  takeLatest,
+  takeLeading,
+} from "redux-saga/effects";
 import { useTheme } from "styled-components";
 import {
   API_addComments,
@@ -36,8 +44,9 @@ function* getComments(data) {
 // 입력하기(ADD)
 function* addComments(data) {
   try {
-    const res = yield call(() => API_addComments(data?.payload));
-    yield put(commentsAction.addCommentsSuccess(res));
+    // const res = yield call(() => API_addComments(data?.payload));
+    const comments = yield API_addComments(data?.payload);
+    yield put(commentsAction.addCommentsSuccess(comments));
     //*---- 코드추가
     yield getAllComments();
     yield getComments();
@@ -62,22 +71,20 @@ function* putComments(data) {
     //*---- 코드추가
     yield getAllComments();
     yield getComments();
-    //*---- 코드추가
-    yield getAllComments();
-    yield getComments();
   } catch (error) {
     yield put(commentsAction.commentsError(error));
   }
 }
 function* watchGetComments() {
-  yield takeEvery(commentsAction.getAllComments, getAllComments);
-  yield takeEvery(commentsAction.getComments, getComments);
-  yield takeEvery(commentsAction.deleteComments, deleteComments);
-  yield takeEvery(commentsAction.addComments, addComments);
-  yield takeEvery(commentsAction.putComments, putComments);
+  yield takeLeading(commentsAction.getAllComments, getAllComments);
+  yield takeLeading(commentsAction.getComments, getComments);
+  yield takeLatest(commentsAction.deleteComments, deleteComments);
+  yield takeLatest(commentsAction.addComments, addComments);
+  yield takeLatest(commentsAction.putComments, putComments);
 }
 // export const
-// watchGetProducts를 바로 export 해서 rootSaga에 넣어도 되는데 saga가 여러개 인 경우 saga로 한번더 감싸준다.
+// watchGetComments 바로 export 해서 rootSaga에 넣어도 되는데 saga가 여러개 인 경우 saga로 한번더 감싸준다.
 export function* commentsSaga() {
   yield all([fork(watchGetComments)]);
 }
+export function* comments() {}

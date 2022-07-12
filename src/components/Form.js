@@ -17,7 +17,7 @@ function Form({ onSubmit }) {
   const { modify } = useSelector((state) => state.comments);
   // hooks
 
-  // 수정업데이트
+  // useEffect
   useEffect(() => {
     setValue("profile_url", modify.profile_url);
     setValue("author", modify.author);
